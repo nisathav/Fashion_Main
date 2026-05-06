@@ -1,1 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Video</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    html {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: #000;
+    }
+
+    body {
+      overflow: hidden;
+      background: #000;
+      width: 1920px;
+      height: 1080px;
+      transform-origin: 0 0;
+    }
+
+    #app {
+      width: 1920px;
+      height: 1080px;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    video {
+      width: 1920px;
+      height: 1080px;
+      object-fit: cover;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <video autoplay muted loop playsinline>
+    <source src="video1.mp4" type="video/mp4" />
+  </video>
+</div>
+
+<script>
+  const DESIGN_W = 1920;
+  const DESIGN_H = 1080;
+
+  function scaleToScreen() {
+    const scaleX = window.innerWidth  / DESIGN_W;
+    const scaleY = window.innerHeight / DESIGN_H;
+    const scale  = Math.min(scaleX, scaleY);
+    document.body.style.transform = `scale(${scale})`;
+    const offsetX = (window.innerWidth  - DESIGN_W * scale) / 2;
+    const offsetY = (window.innerHeight - DESIGN_H * scale) / 2;
+    document.body.style.marginLeft = offsetX + 'px';
+    document.body.style.marginTop  = offsetY + 'px';
+  }
+
+  scaleToScreen();
+  window.addEventListener('resize', scaleToScreen);
+</script>
+</body>
+</html>
