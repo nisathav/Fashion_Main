@@ -6,14 +6,12 @@
   <title>Video</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html {
       width: 100vw;
       height: 100vh;
       overflow: hidden;
       background: #000;
     }
-
     body {
       overflow: hidden;
       background: #000;
@@ -21,7 +19,6 @@
       height: 1920px;
       transform-origin: 0 0;
     }
-
     #app {
       width: 1080px;
       height: 1920px;
@@ -30,7 +27,6 @@
       align-items: center;
       justify-content: center;
     }
-
     video {
       width: 1080px;
       height: 1920px;
@@ -45,7 +41,9 @@
     <source src="video1.mp4" type="video/mp4" />
   </video>
 </div>
+
 <script>
+  /* ── Scale to screen ── */
   const DESIGN_W = 1080;
   const DESIGN_H = 1920;
 
@@ -62,6 +60,13 @@
 
   scaleToScreen();
   window.addEventListener('resize', scaleToScreen);
+
+  /* ── Register Service Worker ── */
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+      .then(() => console.log('Service Worker registered — offline ready'))
+      .catch(err => console.warn('SW registration failed:', err));
+  }
 </script>
 </body>
 </html>
